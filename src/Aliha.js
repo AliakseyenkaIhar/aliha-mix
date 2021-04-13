@@ -1,3 +1,4 @@
+const path = require('path');
 class Aliha {
 
 	constructor(config) {
@@ -26,6 +27,14 @@ class Aliha {
 		return this;
 
 	}
+
+	icons() {
+		this.entries.fonts = [
+			path.resolve(__dirname, 'config/font.js')
+		];
+
+		return this;
+	}s
 
 	// Do I need this method?
 	set outputPath(path) {
