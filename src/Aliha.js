@@ -38,6 +38,10 @@ class Aliha {
 		return this.entries;
 	}
 
+	webpackConfig() {
+		return this.config;
+	}
+
 }
 
 module.exports = Aliha;
