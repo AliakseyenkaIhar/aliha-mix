@@ -9,6 +9,8 @@ class Aliha {
 		// Output folder inside theme
 		this.output = 'public';
 
+		this.public = '../';
+
 	}
 
 	addEntry(from, name) {
@@ -32,6 +34,14 @@ class Aliha {
 
 	get outputPath() {
 		return this.output;
+	}
+
+	set publicPath(path) {
+		this.public = path;
+	}
+
+	get publicPath() {
+		return this.public;
 	}
 
 	getEntries() {

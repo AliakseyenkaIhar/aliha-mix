@@ -11,6 +11,7 @@ const mix = require('../../test/aliha.mix');
 const jsRule = require('../rules/babel');
 const stylesRule = require('../rules/styles');
 const fontsRule = require('../rules/fonts');
+const imagesRule = require('../rules/images');
 
 // Theme settings
 const { THEME: themeName } = process.env;
@@ -62,6 +63,19 @@ const config = {
 		hotUpdateMainFilename: '[runtime].hot-update.json',
 	},
 
+	resolve: {
+		alias: {
+			'@js': path.resolve(themeFolder, 'resources/assets/js'),
+			'@img': path.resolve(themeFolder, 'resources/assets/img'),
+			'@sass': path.resolve(themeFolder, 'resources/assets/sass'),
+			'@icons': path.resolve(themeFolder, 'resources/assets/icons'),
+			'@fonts': path.resolve(themeFolder, 'resources/assets/fonts'),
+			'@resources': path.resolve(themeFolder, 'resources'),
+			'modernizr$': path.resolve('.modernizrrc'),
+		},
+		symlinks: false,
+	},
+
 	// stats: 'errors-only',
 
 	optimization:
@@ -92,6 +106,7 @@ const config = {
 			jsRule,
 			stylesRule,
 			fontsRule,
+			imagesRule,
 		],
 	},
 
