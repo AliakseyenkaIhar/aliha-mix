@@ -4,15 +4,15 @@ require('dotenv').config();
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
-// const BrowserSyncPlugin        = require('browser-sync-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-// const ShowAssetsTablePlugin    = require('webpack-show-assets-table');
+const ShowAssetsTablePlugin = require('webpack-show-assets-table');
 
 // Mix
-const mix = require('../../test/aliha.mix');
+const mix = require('../../aliha.mix');
 
 // Rules
 const jsRule = require('../rules/babel');
@@ -24,7 +24,7 @@ const iconsRule = require('../rules/icons');
 const modernizrRule = require('../rules/modernizr');
 
 // Theme settings
-const { THEME: themeName } = process.env;
+const { THEME: themeName, WP_HOME, BROWSER } = process.env;
 const themeFolder = `web/app/themes/${themeName}`;
 
 // Define is it production mode or not
@@ -35,6 +35,23 @@ const fileName = (ext) => `${ext}/[name].[contenthash:8].${ext}`;
 
 // Plugins
 const plugins = [
+
+	new BrowserSyncPlugin(
+		{
+			proxy: WP_HOME,
+			files: [
+				path.resolve(themeFolder, './resources/views/**/*.twig'),
+				path.resolve(themeFolder, './**/*.php'),
+				path.resolve(themeFolder, './style.css'),
+				path.resolve('./config/**/*.php'),
+				path.resolve('./framework/**/*.php'),
+				path.resolve('./framework/**/*.js'),
+			],
+			browser: BROWSER,
+			notify: false,
+			open: true,
+		}
+	),
 
 	new RemoveEmptyScriptsPlugin(),
 
@@ -47,9 +64,7 @@ const plugins = [
 		excludeWarnings: true,
 	}),
 
-	new WebpackManifestPlugin({
-		publicPath: '/public/',
-	}),
+	new WebpackManifestPlugin(),
 
 	new WebpackBar({
 		name: process.env.NAME,
@@ -57,6 +72,12 @@ const plugins = [
 
 	new CaseSensitivePathsPlugin(),
 ];
+
+if(!process.env.LIVE) {
+	plugins.push(
+		new ShowAssetsTablePlugin(),
+	)
+}
 
 const config = {
 
@@ -101,7 +122,7 @@ const config = {
 		symlinks: false,
 	},
 
-	// stats: 'errors-only',
+	stats: 'errors-only',
 
 	optimization:
 		isProd ?
