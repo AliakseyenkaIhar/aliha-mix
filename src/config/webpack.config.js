@@ -4,6 +4,13 @@ require('dotenv').config();
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
+// const BrowserSyncPlugin        = require('browser-sync-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const WebpackBar = require('webpackbar');
+const WebpackNotifierPlugin = require('webpack-notifier');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+// const ShowAssetsTablePlugin    = require('webpack-show-assets-table');
+
 // Mix
 const mix = require('../../test/aliha.mix');
 
@@ -14,6 +21,7 @@ const fontsRule = require('../rules/fonts');
 const imagesRule = require('../rules/images');
 const svgRule = require('../rules/svg');
 const iconsRule = require('../rules/icons');
+const modernizrRule = require('../rules/modernizr');
 
 // Theme settings
 const { THEME: themeName } = process.env;
@@ -33,6 +41,21 @@ const plugins = [
 	new MiniCssExtractPlugin({
 		filename: () => fileName('css'),
 	}),
+
+	new WebpackNotifierPlugin({
+		title: process.env.NAME,
+		excludeWarnings: true,
+	}),
+
+	new WebpackManifestPlugin({
+		publicPath: '/public/',
+	}),
+
+	new WebpackBar({
+		name: process.env.NAME,
+	}),
+
+	new CaseSensitivePathsPlugin(),
 ];
 
 const config = {
@@ -105,6 +128,7 @@ const config = {
 
 	module: {
 		rules: [
+			modernizrRule,
 			jsRule,
 			stylesRule,
 			fontsRule,
