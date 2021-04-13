@@ -124,6 +124,43 @@ const config = {
 
 	stats: 'errors-only',
 
+	devServer: {
+		overlay: {
+			errors: true,
+			warnings: false,
+		},
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+		},
+		disableHostCheck: !isProd,
+		host: 'localhost',
+		port: 3100,
+		public: 'http://localhost:3100',
+		contentBase: [
+			path.resolve(themeFolder, 'public'),
+			path.resolve(themeFolder, 'resources'),
+		],
+		stats: 'errors-only',
+		compress: true,
+		inline: true,
+		noInfo: false,
+		historyApiFallback: true,
+		open: false,
+		writeToDisk: true,
+		watchContentBase: true,
+		proxy: {
+			'/': {
+				target: WP_HOME,
+				secure: false,
+				changeOrigin: true,
+				autoRewrite: true,
+				headers: {
+					'X-ProxiedBy-Webpack': true,
+				},
+			},
+		},
+	},
+
 	optimization:
 		isProd ?
 			{
