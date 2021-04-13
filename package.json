@@ -1,0 +1,48 @@
+{
+  "name": "aliha-mix",
+  "version": "0.1.0",
+  "description": "Assets compiler for Marusia Templates",
+  "main": "index.js",
+  "scripts": {
+    "development": "webpack --config='src/config/webpack.config.js'",
+    "dev": "npm run development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AliakseyenkaIhar/aliha-mix.git"
+  },
+  "keywords": [
+    "WordPress",
+    "webpack",
+    "assets"
+  ],
+  "author": " <aliha.devs@gmail.com>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/AliakseyenkaIhar/aliha-mix/issues"
+  },
+  "homepage": "https://github.com/AliakseyenkaIhar/aliha-mix#readme",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./commitizen.js"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "cz-customizable": "^6.3.0",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-import-resolver-webpack": "^0.13.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^6.0.0"
+  },
+  "dependencies": {
+    "webpack": "^5.29.0",
+    "webpack-cli": "^4.6.0"
+  }
+}
