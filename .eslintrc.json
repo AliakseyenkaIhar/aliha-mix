@@ -24,8 +24,7 @@
                 "allowIndentationTabs": true
             }
         ],
-        "no-multi-assign": "off",
-        "import/no-extraneous-dependencies": "off"
+        "no-multi-assign": "off"
     },
     "settings": {
         "import/resolver": "webpack"
