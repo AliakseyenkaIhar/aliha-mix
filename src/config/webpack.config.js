@@ -10,6 +10,7 @@ const mix = require('../../test/aliha.mix');
 // Rules
 const jsRule = require('../rules/babel');
 const stylesRule = require('../rules/styles');
+const fontsRule = require('../rules/fonts');
 
 // Theme settings
 const { THEME: themeName } = process.env;
@@ -90,6 +91,7 @@ const config = {
 		rules: [
 			jsRule,
 			stylesRule,
+			fontsRule,
 		],
 	},
 
